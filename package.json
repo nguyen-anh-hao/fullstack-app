@@ -6,12 +6,21 @@
     "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run start:dev --workspace=backend\"",
     "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
     "start": "npm run start --workspace=frontend & npm run start --workspace=backend",
-    "vercel-build": "npm run build"
+    "vercel-build": "npm run build",
+    "format": "npm run format --workspace=frontend && npm run format --workspace=backend",
+    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
+    "test": "npm run test --workspace=frontend && npm run test --workspace=backend",
+    "prepare": "husky install",
+    "install:all": "npm install && npm run install --workspace=frontend && npm run install --workspace=backend"
   },
   "workspaces": [
     "frontend",
     "backend"
   ],
+  "dependencies": {
+    "concurrently": "^7.0.0",
+    "husky": "^9.1.7"
+  },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
