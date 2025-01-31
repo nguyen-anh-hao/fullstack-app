@@ -6,8 +6,7 @@
     "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run start:dev --workspace=backend\"",
     "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
     "start": "npm run start --workspace=frontend & npm run start --workspace=backend",
-    "vercel-build": "npm run build",
-    "prepare": "husky"
+    "vercel-build": "npm run build"
   },
   "workspaces": [
     "frontend",
