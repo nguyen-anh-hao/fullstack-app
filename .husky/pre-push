@@ -1,0 +1,24 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🚀 Running tests before push..."
+
+# Run tests for frontend (Next.js)
+# echo "🧪 Running frontend tests..."
+# cd frontend && npm test
+# FE_STATUS=$?
+# cd ..
+
+# Run tests for backend (NestJS)
+echo "🧪 Running backend tests..."
+cd backend && npm test
+BE_STATUS=$?
+cd ..
+
+# If any test fails, block the push
+if [ $FE_STATUS -ne 0 ] || [ $BE_STATUS -ne 0 ]; then
+    echo "❌ Tests failed. Fix them before pushing!"
+    exit 1
+fi
+
+echo "✅ All tests passed. Proceeding with push."

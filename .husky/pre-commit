@@ -1,0 +1,24 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Running ESLint & Prettier before commit..."
+
+# Check & format frontend (Next.js)
+echo "🛠️ Formatting & Linting frontend..."
+cd frontend && npm run format && npm run lint
+FE_STATUS=$?
+cd ..
+
+# Check & format backend (NestJS)
+echo "🛠️ Formatting & Linting backend..."
+cd backend && npm run format && npm run lint
+BE_STATUS=$?
+cd ..
+
+# If there are errors, block the commit
+if [ $FE_STATUS -ne 0 ] || [ $BE_STATUS -ne 0 ]; then
+    echo "❌ Linting or formatting failed. Please fix errors before committing."
+    exit 1
+fi
+
+echo "✅ All checks passed. Proceeding with commit."

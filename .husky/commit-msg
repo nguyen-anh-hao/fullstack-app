@@ -1,0 +1,17 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 Checking commit message format..."
+
+# Check if the commit message follows the standard
+npx commitlint --edit "$1"
+STATUS=$?
+
+if [ $STATUS -ne 0 ]; then
+    echo "❌ Invalid commit message format."
+    echo "👉 Example: feat: Add registration feature"
+    exit 1
+fi
+
+echo "✅ Commit message format is valid."
+
