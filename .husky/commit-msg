@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 echo "🔍 Checking commit message format..."
 
 # Check if the commit message follows the standard

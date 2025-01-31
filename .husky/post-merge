@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 echo "🔄 Checking for dependency updates after merge..."
 
 # Kiểm tra nếu package.json hoặc package-lock.json thay đổi
