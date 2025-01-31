@@ -1,12 +1,18 @@
 {
   "name": "fullstack-app",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix frontend\" \"npm run start:dev --prefix backend\"",
-    "build": "npm run build --prefix frontend && npm run build --prefix backend",
-    "start": "npm run start --prefix frontend && npm run start --prefix backend",
+    "dev": "concurrently \"npm run dev --workspace=frontend\" \"npm run start:dev --workspace=backend\"",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
+    "start": "npm run start --workspace=frontend & npm run start --workspace=backend",
+    "vercel-build": "npm run build",
     "prepare": "husky"
   },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.6.0",
