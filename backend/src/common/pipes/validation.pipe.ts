@@ -1,3 +1,5 @@
+// 4. Pipe is used to validate the incoming data.
+
 import {
   ValidationPipe as NestValidationPipe,
   Injectable,
@@ -25,7 +27,7 @@ export class ValidationPipe extends NestValidationPipe {
   }
 
   transform(value, metadata) {
-    console.log('4 - ValidationPipe');
+    // console.log('4 - ValidationPipe');
     return super.transform(value, metadata);
   }
 }
