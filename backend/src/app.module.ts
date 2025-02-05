@@ -13,9 +13,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AuthModule,
     UsersModule,
     TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'db.sqlite',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      type: 'mongodb',
+      url: 'mongodb+srv://testhk1524:pwQjkUAEdhymYb05@cluster0.kauyx.mongodb.net/',
+      database: 'cluster0',
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      entities: [__dirname + '/**/*.entity{.ts,.js}'], // Cấu hình entity tương tự như với SQL
       synchronize: true,
     }),
   ],
