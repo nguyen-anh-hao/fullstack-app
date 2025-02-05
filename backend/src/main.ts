@@ -27,11 +27,11 @@ async function bootstrap() {
   const configService = app.get(AppConfigService);
   const port = configService.port;
 
-  await app.init();  // Initialize the app (important in serverless functions)
+  await app.init(); // Initialize the app (important in serverless functions)
   console.log(`🚀 Server is running on http://localhost:${port}`);
-  return server;  // Return the Express server, needed for Vercel handler
+  return server; // Return the Express server, needed for Vercel handler
 }
 
-bootstrap().then(server => {
-  module.exports = server;  // Export the server for Vercel
+bootstrap().then((server) => {
+  module.exports = server; // Export the server for Vercel
 });
