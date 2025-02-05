@@ -1,12 +1,17 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { DatabaseModule } from '../database/database.module';
 
-@Module({
-  imports: [DatabaseModule],
-  controllers: [UsersController],
-  providers: [UsersService],
-  exports: [UsersService],
-})
-export class UsersModule {}
+@Module({})
+export class UsersModule {
+  static forRoot(): DynamicModule {
+    return {
+      module: UsersModule,
+      imports: [DatabaseModule],
+      controllers: [UsersController],
+      providers: [UsersService],
+      exports: [UsersService],
+    };
+  }
+}

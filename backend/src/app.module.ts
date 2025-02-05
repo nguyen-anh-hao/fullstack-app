@@ -9,17 +9,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
-    AppConfigModule,
-    AuthModule,
-    UsersModule,
-    TypeOrmModule.forRoot({
-      type: 'mongodb',
-      url: 'mongodb+srv://testhk1524:pwQjkUAEdhymYb05@cluster0.kauyx.mongodb.net/',
-      database: 'cluster0',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true,
+    AppConfigModule.forRoot(),
+    AuthModule.forRoot(),
+    UsersModule.forRoot(),
+    TypeOrmModule.forRootAsync({
+      useFactory: () => ({
+        type: 'mongodb',
+        url: 'mongodb+srv://testhk1524:pwQjkUAEdhymYb05@cluster0.kauyx.mongodb.net/',
+        database: 'cluster0',
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        synchronize: true,
+        autoLoadEntities: true,
+      }),
     }),
   ],
   controllers: [AppController],
