@@ -5,26 +5,33 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ValidationPipe } from './common/pipes/validation.pipe';
 import { AppConfigService } from './config/config.service';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import * as express from 'express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const server = express();
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+
   app.setGlobalPrefix('api');
 
-  // 3, 7. Interceptor
+  // Interceptors
   app.useGlobalInterceptors(new LoggerInterceptor());
   app.useGlobalInterceptors(new ResponseInterceptor());
 
-  // 4. Pipe
+  // Pipe
   app.useGlobalPipes(new ValidationPipe());
 
-  // 8. Exception Filter
+  // Exception Filter
   app.useGlobalFilters(new HttpExceptionFilter());
 
   const configService = app.get(AppConfigService);
   const port = configService.port;
 
-  await app.listen(port);
+  await app.init();  // Initialize the app (important in serverless functions)
   console.log(`🚀 Server is running on http://localhost:${port}`);
+  return server;  // Return the Express server, needed for Vercel handler
 }
-export default bootstrap;
-bootstrap();
+
+bootstrap().then(server => {
+  module.exports = server;  // Export the server for Vercel
+});
