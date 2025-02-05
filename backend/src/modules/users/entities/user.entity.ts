@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, ObjectIdColumn, Column } from 'typeorm';
 import { IUser } from '../interfaces/user.interface';
 
 @Entity()
 export class User implements IUser {
-  @PrimaryGeneratedColumn()
+  // @PrimaryGeneratedColumn()
+  @ObjectIdColumn()
   id: number;
 
   @Column({ unique: true })

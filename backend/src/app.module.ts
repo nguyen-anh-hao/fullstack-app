@@ -18,7 +18,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'cluster0',
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'], // Cấu hình entity tương tự như với SQL
+      entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
   ],

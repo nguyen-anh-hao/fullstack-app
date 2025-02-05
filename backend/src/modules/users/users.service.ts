@@ -16,10 +16,10 @@ export class UsersService {
       throw new BadRequestException('Email already exists');
     }
     const user = this.usersRepository.create({ email, password });
-    return this.usersRepository.save(user);
+    return await this.usersRepository.save(user);
   }
 
   async findOneByEmail(email: string): Promise<IUser | null> {
-    return this.usersRepository.findOne({ where: { email } });
+    return await this.usersRepository.findOne({ where: { email } });
   }
 }
