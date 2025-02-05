@@ -6,15 +6,16 @@
       "use": "@vercel/next"
     },
     {
-      "src": "backend/src/main.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "dist/**/*"
-        ]
-      }
+      "src": "backend/dist/**/*",
+      "use": "@vercel/node"
     }
   ],
+  "functions": {
+    "backend/dist/**/*": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
   "routes": [
     {
       "src": "/api/(.*)",
